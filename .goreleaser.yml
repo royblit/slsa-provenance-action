@@ -34,6 +34,9 @@ archives:
       - goos: windows
         format: zip
 
+checksum:
+  name_template: 'checksums.txt'
+
 dockers:
   - goos: linux
     goarch: amd64
@@ -57,8 +60,43 @@ dockers:
       - "go.sum"
       - "cmd"
       - "lib"
-checksum:
-  name_template: 'checksums.txt'
+
+docker_manifests:
+  - name_template: 'philipssoftware/{{ .ProjectName }}:v{{ .Version }}'
+    image_templates:
+      - 'philipssoftware/{{ .ProjectName }}:v{{ .Version }}-amd64'
+      - 'philipssoftware/{{ .ProjectName }}:v{{ .Version }}-arm64'
+  - name_template: 'ghcr.io/philips-labs/{{ .ProjectName }}:v{{ .Version }}'
+    image_templates:
+      - 'ghcr.io/philips-labs/{{ .ProjectName }}:v{{ .Version }}-amd64'
+      - 'ghcr.io/philips-labs/{{ .ProjectName }}:v{{ .Version }}-arm64'
+  - name_template: 'philipssoftware/{{ .ProjectName }}:{{ .FullCommit }}'
+    image_templates:
+      - 'philipssoftware/{{ .ProjectName }}:v{{ .Version }}-amd64'
+      - 'philipssoftware/{{ .ProjectName }}:v{{ .Version }}-arm64'
+  - name_template: 'ghcr.io/philips-labs/{{ .ProjectName }}:{{ .FullCommit }}'
+    image_templates:
+      - 'ghcr.io/philips-labs/{{ .ProjectName }}:v{{ .Version }}-amd64'
+      - 'ghcr.io/philips-labs/{{ .ProjectName }}:v{{ .Version }}-arm64'
+
+signs:
+  - cmd: cosign
+    certificate: '${artifact}.pem'
+    output: true
+    artifacts: checksum
+    args:
+      - sign-blob
+      - '--output-certificate=${certificate}'
+      - '--output-signature=${signature}'
+      - '${artifact}'
+
+docker_signs:
+  - cmd: cosign
+    artifacts: manifests
+    output: true
+    args:
+      - 'sign'
+      - '${artifact}'
 
 snapshot:
   name_template: "{{ .Version }}-next"
