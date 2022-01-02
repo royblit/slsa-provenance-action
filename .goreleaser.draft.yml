@@ -38,8 +38,8 @@ dockers:
   - goos: linux
     goarch: amd64
     image_templates:
-      - "royblit/{{ .ProjectName }}:v{{ .Version }}"
-      - "royblit/{{ .ProjectName }}:{{ .FullCommit }}"
+      - "rblit/{{ .ProjectName }}:v{{ .Version }}"
+      - "rblit/{{ .ProjectName }}:{{ .FullCommit }}"
       - "ghcr.io/royblit/{{ .ProjectName }}:v{{ .Version }}"
       - "ghcr.io/royblit/{{ .ProjectName }}:{{ .FullCommit }}"
     build_flag_templates:
