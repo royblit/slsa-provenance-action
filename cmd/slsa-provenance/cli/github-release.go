@@ -7,10 +7,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/philips-labs/slsa-provenance-action/cmd/slsa-provenance/cli/options"
-	"github.com/philips-labs/slsa-provenance-action/lib/github"
-	"github.com/philips-labs/slsa-provenance-action/lib/intoto"
-	"github.com/philips-labs/slsa-provenance-action/lib/transport"
+	"github.com/royblit/slsa-provenance-action/cmd/slsa-provenance/cli/options"
+	"github.com/royblit/slsa-provenance-action/lib/github"
+	"github.com/royblit/slsa-provenance-action/lib/intoto"
+	"github.com/royblit/slsa-provenance-action/lib/transport"
 )
 
 // GitHubRelease creates an instance of *cobra.Command to manage GitHub release provenance

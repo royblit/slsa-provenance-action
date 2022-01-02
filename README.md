@@ -12,7 +12,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/philips-labs/slsa-provenance-action">
+  <a href="https://github.com/royblit/slsa-provenance-action">
     <img src="https://slsa.dev/images/levelBadge1.svg" alt="Logo" width="80" height="80">
   </a>
 
@@ -21,9 +21,9 @@
   <p align="center">
     Github Action to generate [SLSA provenance][slsa-provenance]
     <br>
-    <a href="https://github.com/philips-labs/slsa-provenance-action/issues">Report Bug</a>
+    <a href="https://github.com/royblit/slsa-provenance-action/issues">Report Bug</a>
     ·
-    <a href="https://github.com/philips-labs/slsa-provenance-action/issues">Request Feature</a>
+    <a href="https://github.com/royblit/slsa-provenance-action/issues">Request Feature</a>
   </p>
 </div>
 

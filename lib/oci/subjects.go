@@ -9,7 +9,7 @@ import (
 
 	"github.com/docker/docker/client"
 
-	"github.com/philips-labs/slsa-provenance-action/lib/intoto"
+	"github.com/royblit/slsa-provenance-action/lib/intoto"
 )
 
 // ContainerSubjecter implements Subjector to retrieve Subject from given container

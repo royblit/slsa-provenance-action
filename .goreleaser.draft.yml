@@ -38,10 +38,10 @@ dockers:
   - goos: linux
     goarch: amd64
     image_templates:
-      - "philipssoftware/{{ .ProjectName }}:v{{ .Version }}"
-      - "philipssoftware/{{ .ProjectName }}:{{ .FullCommit }}"
-      - "ghcr.io/philips-labs/{{ .ProjectName }}:v{{ .Version }}"
-      - "ghcr.io/philips-labs/{{ .ProjectName }}:{{ .FullCommit }}"
+      - "royblit/{{ .ProjectName }}:v{{ .Version }}"
+      - "royblit/{{ .ProjectName }}:{{ .FullCommit }}"
+      - "ghcr.io/royblit/{{ .ProjectName }}:v{{ .Version }}"
+      - "ghcr.io/royblit/{{ .ProjectName }}:{{ .FullCommit }}"
     build_flag_templates:
       - "--pull"
       - "--label=org.opencontainers.image.created={{.Date}}"
@@ -50,7 +50,7 @@ dockers:
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version=v{{.Version}}"
       - "--label=org.opencontainers.image.licenses=MIT"
-      - "--label=org.opencontainers.image.vendor=Koninklijke Philips N.V."
+      - "--label=org.opencontainers.image.vendor=SLSA test"
     extra_files:
       - "Makefile"
       - "go.mod"

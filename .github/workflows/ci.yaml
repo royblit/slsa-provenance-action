@@ -1,7 +1,7 @@
 name: Continuous integration
 
 on:
-  push:
+  #push:
   pull_request:
     types: [ opened, reopened ]
   workflow_dispatch:
@@ -84,7 +84,7 @@ jobs:
       - name: Login to Container registries
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u philipssoftware --password-stdin
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u rblit --password-stdin
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login -u ${{ github.actor }} --password-stdin ghcr.io
 
       - name: Set release variables
@@ -154,7 +154,7 @@ jobs:
       - name: Login to Container registries
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u philipssoftware --password-stdin
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u rblit --password-stdin
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login -u ${{ github.actor }} --password-stdin ghcr.io
 
       - name: Attach provenance to image

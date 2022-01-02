@@ -40,8 +40,8 @@ dockers:
     image_templates:
       - "philipssoftware/{{ .ProjectName }}:v{{ .Version }}"
       - "philipssoftware/{{ .ProjectName }}:{{ .FullCommit }}"
-      - "ghcr.io/philips-labs/{{ .ProjectName }}:v{{ .Version }}"
-      - "ghcr.io/philips-labs/{{ .ProjectName }}:{{ .FullCommit }}"
+      - "ghcr.io/royblit/{{ .ProjectName }}:v{{ .Version }}"
+      - "ghcr.io/royblit/{{ .ProjectName }}:{{ .FullCommit }}"
     build_flag_templates:
       - "--pull"
       - "--label=org.opencontainers.image.created={{.Date}}"

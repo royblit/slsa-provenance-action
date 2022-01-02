@@ -1,4 +1,4 @@
-module github.com/philips-labs/slsa-provenance-action
+module github.com/royblit/slsa-provenance-action
 
 go 1.17
 

@@ -14,14 +14,14 @@ ifeq ($(DIFF), 1)
     GIT_TREESTATE = "dirty"
 endif
 
-PKG=github.com/philips-labs/slsa-provenance-action/cmd/slsa-provenance/cli
+PKG=github.com/royblit/slsa-provenance-action/cmd/slsa-provenance/cli
 LDFLAGS="-X $(PKG).GitVersion=$(GIT_VERSION) -X $(PKG).gitCommit=$(GIT_HASH) -X $(PKG).gitTreeState=$(GIT_TREESTATE) -X $(PKG).buildDate=$(BUILD_DATE)"
 
 GO_BUILD_FLAGS := -trimpath -ldflags $(LDFLAGS)
 COMMANDS       := slsa-provenance
 
-HUB_REPO := philipssoftware/slsa-provenance
-GHCR_REPO := ghcr.io/philips-labs/slsa-provenance
+HUB_REPO := royblit/slsa-provenance
+GHCR_REPO := ghcr.io/royblit/slsa-provenance
 
 check_defined = \
     $(strip $(foreach 1,$1, \
@@ -54,7 +54,7 @@ lint: $(GO_PATH)/bin/goimports $(GO_PATH)/bin/golint ## runs linting
 	@echo Linting using golint
 	@golint -set_exit_status $(shell go list -f '{{ .Dir }}' ./...)
 	@echo Linting imports
-	@goimports -d -e -local github.com/philips-labs/slsa-provenance-action $(shell go list -f '{{ .Dir }}' ./...)
+	@goimports -d -e -local github.com/royblit/slsa-provenance-action $(shell go list -f '{{ .Dir }}' ./...)
 
 .PHONY: test
 test: ## runs the tests
@@ -117,11 +117,11 @@ gh-release: ## Creates a new release by creating a new tag and pushing it
 	@echo
 	@echo ATTENTION: MANUAL ACTION REQUIRED!! -- Wait for the release workflow to finish
 	@echo
-	@echo Check status here https://github.com/philips-labs/slsa-provenance-action/actions/workflows/ci.yaml
+	@echo Check status here https://github.com/royblit/slsa-provenance-action/actions/workflows/ci.yaml
 	@echo
 	@echo Once finished, push the main branch using 'git push'
 	@echo
-	@echo Visit https://github.com/philips-labs/slsa-provenance-action/releases
+	@echo Visit https://github.com/royblit/slsa-provenance-action/releases
 	@echo Edit the release and save it to publish to GitHub Marketplace.
 	@echo
 	@git stash pop
@@ -134,9 +134,9 @@ container-digest: ## retrieves the container digest from the given tag
 .PHONY: container-tags
 container-tags: ## retrieves the container tags applied to the image with a given digest
 	@:$(call check_defined, CONTAINER_DIGEST)
-	@docker inspect ghcr.io/philips-labs/slsa-provenance@$(CONTAINER_DIGEST) --format '{{ join .RepoTags "\n" }}' | sed 's/.*://' | awk '!_[$$0]++'
+	@docker inspect ghcr.io/royblit/slsa-provenance@$(CONTAINER_DIGEST) --format '{{ join .RepoTags "\n" }}' | sed 's/.*://' | awk '!_[$$0]++'
 
 .PHONY: container-repos
 container-repos: ## retrieves the container tags applied to the image with a given digest
 	@:$(call check_defined, CONTAINER_DIGEST)
-	@docker inspect ghcr.io/philips-labs/slsa-provenance@$(CONTAINER_DIGEST) --format '{{ join .RepoTags "\n" }}' | sed 's/:.*//' | awk '!_[$$0]++'
+	@docker inspect ghcr.io/royblit/slsa-provenance@$(CONTAINER_DIGEST) --format '{{ join .RepoTags "\n" }}' | sed 's/:.*//' | awk '!_[$$0]++'
