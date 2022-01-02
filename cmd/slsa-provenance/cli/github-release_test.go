@@ -11,8 +11,8 @@ import (
 	gh "github.com/google/go-github/v41/github"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/philips-labs/slsa-provenance-action/cmd/slsa-provenance/cli"
-	"github.com/philips-labs/slsa-provenance-action/lib/github"
+	"github.com/royblit/slsa-provenance-action/cmd/slsa-provenance/cli"
+	"github.com/royblit/slsa-provenance-action/lib/github"
 )
 
 func TestProvenenaceGitHubRelease(t *testing.T) {
@@ -28,7 +28,7 @@ func TestProvenenaceGitHubRelease(t *testing.T) {
 	provenanceFile := path.Join(artifactPath, "unittest.provenance")
 
 	ctx := context.Background()
-	owner, repo := "philips-labs", "slsa-provenance-action"
+	owner, repo := "royblit", "slsa-provenance-action"
 	oauthClient := github.NewOAuth2Client(ctx, func() string { return githubToken })
 	client := github.NewReleaseClient(oauthClient)
 

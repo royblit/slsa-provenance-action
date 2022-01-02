@@ -15,7 +15,7 @@ func TestPullImageTags(t *testing.T) {
 	if !assert.NoError(err) {
 		return
 	}
-	repo := "ghcr.io/philips-labs/slsa-provenance"
+	repo := "ghcr.io/royblit/slsa-provenance"
 	expectedDigest := "sha256:194b471a878add368bf02a7935fa099024576c029491bcefaeb87f81efa093a3"
 	expectedTags := []string{"33ba3da2213c83ce02df0f2f6ba925ec79037f9d", "v0.4.0"}
 	s := NewContainerSubjecter(cli, repo, expectedDigest, expectedTags...)

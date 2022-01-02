@@ -11,13 +11,13 @@
   "predicateType": "https://slsa.dev/provenance/v0.2",
   "predicate": {
     "builder": {
-      "id": "https://github.com/philips-labs/slsa-provenance-action/Attestations/GitHubHostedActions@v1"
+      "id": "https://github.com/royblit/slsa-provenance-action/Attestations/GitHubHostedActions@v1"
     },
     "buildType": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
     "invocation": {
       "configSource": {
         "entryPoint": "ci.yaml:build",
-        "uri": "git+https://github.com/philips-labs/slsa-provenance-action",
+        "uri": "git+https://github.com/royblit/slsa-provenance-action",
         "digest": {
           "sha1": "a3bc1c27230caa1cc3c27961f7e9cab43cd208dc"
         }
@@ -27,7 +27,7 @@
     },
     "buildConfig": null,
     "metadata": {
-      "buildInvocationId": "https://github.com/philips-labs/slsa-provenance-action/actions/runs/1303916967",
+      "buildInvocationId": "https://github.com/royblit/slsa-provenance-action/actions/runs/1303916967",
       "buildFinishedOn": "2021-10-04T11:08:34Z",
       "completeness": {
         "parameters": true,
@@ -38,7 +38,7 @@
     },
     "materials": [
       {
-        "uri": "git+https://github.com/philips-labs/slsa-provenance-action",
+        "uri": "git+https://github.com/royblit/slsa-provenance-action",
         "digest": {
           "sha1": "a3bc1c27230caa1cc3c27961f7e9cab43cd208dc"
         }

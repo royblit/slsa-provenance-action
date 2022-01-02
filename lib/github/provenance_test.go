@@ -11,8 +11,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/philips-labs/slsa-provenance-action/lib/github"
-	"github.com/philips-labs/slsa-provenance-action/lib/intoto"
+	"github.com/royblit/slsa-provenance-action/lib/github"
+	"github.com/royblit/slsa-provenance-action/lib/intoto"
 )
 
 const (
@@ -37,10 +37,10 @@ const (
 		"message": "Update example-local.yml",
 		"timestamp": "2021-10-12T12:18:06+02:00",
 		"tree_id": "a4dda43e9a101031dc6cd14def2d6e34ef9b4d92",
-		"url": "https://github.com/philips-labs/slsa-provenance-action/commit/c4f679f131dfb7f810fd411ac9475549d1c393df"
+		"url": "https://github.com/royblit/slsa-provenance-action/commit/c4f679f131dfb7f810fd411ac9475549d1c393df"
 	  }
 	],
-	"compare": "https://github.com/philips-labs/slsa-provenance-action/compare/715b4daa0f75...c4f679f131df",
+	"compare": "https://github.com/royblit/slsa-provenance-action/compare/715b4daa0f75...c4f679f131df",
 	"created": false,
 	"deleted": false,
 	"enterprise": {
@@ -72,21 +72,21 @@ const (
 	  "message": "Update example-local.yml",
 	  "timestamp": "2021-10-12T12:18:06+02:00",
 	  "tree_id": "a4dda43e9a101031dc6cd14def2d6e34ef9b4d92",
-	  "url": "https://github.com/philips-labs/slsa-provenance-action/commit/c4f679f131dfb7f810fd411ac9475549d1c393df"
+	  "url": "https://github.com/royblit/slsa-provenance-action/commit/c4f679f131dfb7f810fd411ac9475549d1c393df"
 	},
 	"organization": {
 	  "avatar_url": "https://avatars.githubusercontent.com/u/58286953?v=4",
 	  "description": "Philips Labs - Projects in development",
-	  "events_url": "https://api.github.com/orgs/philips-labs/events",
-	  "hooks_url": "https://api.github.com/orgs/philips-labs/hooks",
+	  "events_url": "https://api.github.com/orgs/royblit/events",
+	  "hooks_url": "https://api.github.com/orgs/royblit/hooks",
 	  "id": 58286953,
-	  "issues_url": "https://api.github.com/orgs/philips-labs/issues",
-	  "login": "philips-labs",
-	  "members_url": "https://api.github.com/orgs/philips-labs/members{/member}",
+	  "issues_url": "https://api.github.com/orgs/royblit/issues",
+	  "login": "royblit",
+	  "members_url": "https://api.github.com/orgs/royblit/members{/member}",
 	  "node_id": "MDEyOk9yZ2FuaXphdGlvbjU4Mjg2OTUz",
-	  "public_members_url": "https://api.github.com/orgs/philips-labs/public_members{/member}",
-	  "repos_url": "https://api.github.com/orgs/philips-labs/repos",
-	  "url": "https://api.github.com/orgs/philips-labs"
+	  "public_members_url": "https://api.github.com/orgs/royblit/public_members{/member}",
+	  "repos_url": "https://api.github.com/orgs/royblit/repos",
+	  "url": "https://api.github.com/orgs/royblit"
 	},
 	"pusher": {
 	  "email": "john.doe@philips.com",
@@ -95,15 +95,15 @@ const (
 	"ref": "refs/heads/temp/dump-context",
 	"repository": {
 	  "allow_forking": true,
-	  "archive_url": "https://api.github.com/repos/philips-labs/slsa-provenance-action/{archive_format}{/ref}",
+	  "archive_url": "https://api.github.com/repos/royblit/slsa-provenance-action/{archive_format}{/ref}",
 	  "archived": false,
-	  "assignees_url": "https://api.github.com/repos/philips-labs/slsa-provenance-action/assignees{/user}",
-	  "blobs_url": "https://api.github.com/repos/philips-labs/slsa-provenance-action/git/blobs{/sha}",
-	  "branches_url": "https://api.github.com/repos/philips-labs/slsa-provenance-action/branches{/branch}",
-	  "clone_url": "https://github.com/philips-labs/slsa-provenance-action.git",
-	  "collaborators_url": "https://api.github.com/repos/philips-labs/slsa-provenance-action/collaborators{/collaborator}",
-	  "comments_url": "https://api.github.com/repos/philips-labs/slsa-provenance-action/comments{/number}",
-	  "commits_url": "https://api.github.com/repos/philips-labs/slsa-provenance-action/commits{/sha}",
+	  "assignees_url": "https://api.github.com/repos/royblit/slsa-provenance-action/assignees{/user}",
+	  "blobs_url": "https://api.github.com/repos/royblit/slsa-provenance-action/git/blobs{/sha}",
+	  "branches_url": "https://api.github.com/repos/royblit/slsa-provenance-action/branches{/branch}",
+	  "clone_url": "https://github.com/royblit/slsa-provenance-action.git",
+	  "collaborators_url": "https://api.github.com/repos/royblit/slsa-provenance-action/collaborators{/collaborator}",
+	  "comments_url": "https://api.github.com/repos/royblit/slsa-provenance-action/comments{/number}",
+	  "commits_url": "https://api.github.com/repos/royblit/slsa-provenance-action/commits{/sha}",
 	  "compare_url": "https://api.github.com/repos/philips-labs/slsa-provenance-action/compare/{base}...{head}",
 	  "contents_url": "https://api.github.com/repos/philips-labs/slsa-provenance-action/contents/{+path}",
 	  "contributors_url": "https://api.github.com/repos/philips-labs/slsa-provenance-action/contributors",

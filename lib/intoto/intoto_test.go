@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	repoURI           = "https://github.com/philips-labs/slsa-provenance-action"
+	repoURI           = "https://github.com/royblit/slsa-provenance-action"
 	builderID         = repoURI + "/Attestations/GitHubHostedActions@v1"
 	buildInvocationID = repoURI + "/actions/runs/123498765"
 	buildType         = "https://github.com/Attestations/GitHubActionsWorkflow@v1"
@@ -58,7 +58,7 @@ func TestSLSAProvenanceStatement(t *testing.T) {
 
 	provenanceActionMaterial := []Item{
 		{
-			URI:    "git+https://github.com/philips-labs/slsa-provenance-action",
+			URI:    "git+https://github.com/royblit/slsa-provenance-action",
 			Digest: DigestSet{"sha1": "c4f679f131dfb7f810fd411ac9475549d1c393df"},
 		},
 	}
@@ -66,7 +66,7 @@ func TestSLSAProvenanceStatement(t *testing.T) {
 	stmt = SLSAProvenanceStatement(
 		WithSubject([]Subject{{Name: "salsa.txt", Digest: DigestSet{"sha256": "f8161d035cdf328c7bb124fce192cb90b603f34ca78d73e33b736b4f6bddf993"}}}),
 		WithBuilder(builderID),
-		WithMetadata("https://github.com/philips-labs/slsa-provenance-action/actions/runs/1303916967"),
+		WithMetadata("https://github.com/royblit/slsa-provenance-action/actions/runs/1303916967"),
 		WithInvocation(
 			buildType,
 			"ci.yaml:build",
@@ -83,7 +83,7 @@ func TestSLSAProvenanceStatementJSON(t *testing.T) {
 
 	materialJSON := `[
 			{
-				"uri": "git+https://github.com/philips-labs/slsa-provenance-action",
+				"uri": "git+https://github.com/royblit/slsa-provenance-action",
 				"digest": {
 					"sha1": "a3bc1c27230caa1cc3c27961f7e9cab43cd208dc"
 				}
@@ -119,7 +119,7 @@ func TestSLSAProvenanceStatementJSON(t *testing.T) {
 		"invocation": {
 			"configSource": {
 				"entryPoint": "ci.yaml:build",
-				"uri": "git+https://github.com/philips-labs/slsa-provenance-action",
+				"uri": "git+https://github.com/royblit/slsa-provenance-action",
 				"digest": {
 					"sha1": "a3bc1c27230caa1cc3c27961f7e9cab43cd208dc"
 				}
@@ -128,7 +128,7 @@ func TestSLSAProvenanceStatementJSON(t *testing.T) {
 			"environment": null
 		},
 		"metadata": {
-			"buildInvocationId": "https://github.com/philips-labs/slsa-provenance-action/actions/runs/1303916967",
+			"buildInvocationId": "https://github.com/royblit/slsa-provenance-action/actions/runs/1303916967",
 			"buildFinishedOn": "%s",
 			"completeness": {
 				"parameters": true,
@@ -149,7 +149,7 @@ func TestSLSAProvenanceStatementJSON(t *testing.T) {
 	newStmt := SLSAProvenanceStatement(
 		WithSubject([]Subject{{Name: "salsa.txt", Digest: DigestSet{"sha256": "f8161d035cdf328c7bb124fce192cb90b603f34ca78d73e33b736b4f6bddf993"}}}),
 		WithBuilder(builderID),
-		WithMetadata("https://github.com/philips-labs/slsa-provenance-action/actions/runs/1303916967"),
+		WithMetadata("https://github.com/royblit/slsa-provenance-action/actions/runs/1303916967"),
 		WithInvocation(buildType, "ci.yaml:build", nil, []byte(parametersJSON), material),
 	)
 
@@ -181,7 +181,7 @@ func assertConfigSource(assert *assert.Assertions, cs ConfigSource, materials []
 }
 
 func assertMetadata(assert *assert.Assertions, md Metadata) {
-	assert.Equal("https://github.com/philips-labs/slsa-provenance-action/actions/runs/1303916967", md.BuildInvocationID)
+	assert.Equal("https://github.com/royblit/slsa-provenance-action/actions/runs/1303916967", md.BuildInvocationID)
 	bft, err := time.Parse(time.RFC3339, md.BuildFinishedOn)
 	assert.NoError(err)
 	assert.WithinDuration(time.Now().UTC(), bft, 1200*time.Millisecond)

@@ -10,7 +10,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/philips-labs/slsa-provenance-action/cmd/slsa-provenance/cli"
+	"github.com/royblit/slsa-provenance-action/cmd/slsa-provenance/cli"
 )
 
 const (

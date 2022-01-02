@@ -8,7 +8,7 @@ import (
 	"github.com/docker/docker/client"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/philips-labs/slsa-provenance-action/lib/intoto"
+	"github.com/royblit/slsa-provenance-action/lib/intoto"
 )
 
 func TestSubjects(t *testing.T) {
@@ -19,7 +19,7 @@ func TestSubjects(t *testing.T) {
 		return
 	}
 
-	repo := "ghcr.io/philips-labs/slsa-provenance"
+	repo := "ghcr.io/royblit/slsa-provenance"
 
 	errorCases := []struct {
 		name   string

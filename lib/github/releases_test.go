@@ -13,12 +13,12 @@ import (
 	gh "github.com/google/go-github/v41/github"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/philips-labs/slsa-provenance-action/lib/github"
-	"github.com/philips-labs/slsa-provenance-action/lib/transport"
+	"github.com/royblit/slsa-provenance-action/lib/github"
+	"github.com/royblit/slsa-provenance-action/lib/transport"
 )
 
 const (
-	owner = "philips-labs"
+	owner = "royblit"
 	repo  = "slsa-provenance-action"
 )
 
@@ -44,7 +44,7 @@ func TestFetchRelease(t *testing.T) {
 	assert := assert.New(t)
 	ctx := context.Background()
 
-	api := "https://api.github.com/repos/philips-labs/slsa-provenance-action/releases"
+	api := "https://api.github.com/repos/royblit/slsa-provenance-action/releases"
 
 	client, requestLogger := createReleaseClient(ctx)
 	release, err := client.FetchRelease(ctx, owner, repo, "v0.1.1")
@@ -66,7 +66,7 @@ func TestDownloadReleaseAssets(t *testing.T) {
 
 	ctx := context.Background()
 
-	api := "https://api.github.com/repos/philips-labs/slsa-provenance-action/releases"
+	api := "https://api.github.com/repos/royblit/slsa-provenance-action/releases"
 	version := "v0.1.1"
 	client, requestLogger := createReleaseClient(ctx)
 	release, _, err := client.Repositories.GetReleaseByTag(ctx, owner, repo, version)
@@ -165,7 +165,7 @@ func TestListReleaseAssets(t *testing.T) {
 	assert := assert.New(t)
 	ctx := context.Background()
 
-	api := "https://api.github.com/repos/philips-labs/slsa-provenance-action/releases/51517953/assets"
+	api := "https://api.github.com/repos/royblit/slsa-provenance-action/releases/51517953/assets"
 
 	client, requestLogger := createReleaseClient(ctx)
 	opt := gh.ListOptions{PerPage: 4}
@@ -185,14 +185,14 @@ func TestListReleaseAssets(t *testing.T) {
 	assert.Len(assets, 7)
 
 	_, err = client.ListReleaseAssets(ctx, owner, repo, 0, opt)
-	assert.EqualError(err, "failed to list release assets: GET https://api.github.com/repos/philips-labs/slsa-provenance-action/releases/0/assets?per_page=10: 404 Not Found []")
+	assert.EqualError(err, "failed to list release assets: GET https://api.github.com/repos/royblit/slsa-provenance-action/releases/0/assets?per_page=10: 404 Not Found []")
 }
 
 func TestListReleases(t *testing.T) {
 	assert := assert.New(t)
 	ctx := context.Background()
 
-	api := "https://api.github.com/repos/philips-labs/slsa-provenance-action/releases"
+	api := "https://api.github.com/repos/royblit/slsa-provenance-action/releases"
 
 	client, requestLogger := createReleaseClient(ctx)
 	opt := gh.ListOptions{PerPage: 4}
@@ -213,7 +213,7 @@ func TestListReleases(t *testing.T) {
 
 	opt = gh.ListOptions{PerPage: 2}
 	_, err = client.ListReleases(ctx, owner, repo+"-fake", opt)
-	assert.EqualError(err, "failed to list releases: GET https://api.github.com/repos/philips-labs/slsa-provenance-action-fake/releases?per_page=2: 404 Not Found []")
+	assert.EqualError(err, "failed to list releases: GET https://api.github.com/repos/royblit/slsa-provenance-action-fake/releases?per_page=2: 404 Not Found []")
 }
 
 func expectedRequestPages(method string, api string, size int, count int) string {

@@ -9,7 +9,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/philips-labs/slsa-provenance-action/cmd/slsa-provenance/cli"
+	"github.com/royblit/slsa-provenance-action/cmd/slsa-provenance/cli"
 )
 
 func TestGenerateContainerCliOptions(t *testing.T) {
@@ -68,7 +68,7 @@ func TestGenerateContainerCliOptions(t *testing.T) {
 				"--runner-context",
 				base64RunnerContext,
 				"--repository",
-				"ghcr.io/philips-labs/slsa-provenance",
+				"ghcr.io/royblit/slsa-provenance",
 				"--tags",
 				"v0.4.0,33ba3da2213c83ce02df0f2f6ba925ec79037f9d",
 			},
@@ -82,7 +82,7 @@ func TestGenerateContainerCliOptions(t *testing.T) {
 				"--runner-context",
 				base64RunnerContext,
 				"--repository",
-				"ghcr.io/philips-labs/slsa-provenance",
+				"ghcr.io/royblit/slsa-provenance",
 				"--tags",
 				"v0.4.0,33ba3da2213c83ce02df0f2f6ba925ec79037f9d",
 				"--digest",
