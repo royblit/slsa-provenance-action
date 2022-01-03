@@ -145,7 +145,7 @@ jobs:
       - name: ls
         run: ls
       - name: branch name
-        run: echo ${{ GITHUB_REF }}
+        run: echo $GITHUB_REF
       - name: Generate provenance for ${{ matrix.repo }}
         uses: ./action.yaml
         with:
