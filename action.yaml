@@ -47,6 +47,6 @@ runs:
       run: |
         echo Running slsa-provenance with following arguments
         echo ${{ steps.compose-args.outputs.provenance_args }}
-    - uses: /royblit/slsa-provenance:latest'
+    - uses: /royblit/slsa-provenance:v0.5.0-rb7'
       with:
         args: ${{ steps.compose-args.outputs.provenance_args }}
