@@ -147,7 +147,7 @@ jobs:
       - name: branch name
         run: echo $GITHUB_REF
       - name: Generate provenance for ${{ matrix.repo }}
-        uses: .
+        uses: ./
         with:
           command: generate
           subcommand: container
@@ -190,7 +190,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Generate provenance for Release
-        uses: .
+        uses: ./
         with:
           command: generate
           subcommand: github-release

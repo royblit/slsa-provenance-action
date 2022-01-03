@@ -27,7 +27,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Generate provenance
-        uses: .
+        uses: ./
         with:
           command: generate
           subcommand: files
