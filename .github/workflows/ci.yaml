@@ -1,133 +1,133 @@
 name: Continuous integration
 
 on:
-  #push:
+  push:
   pull_request:
     types: [ opened, reopened ]
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Set up Go
-        uses: actions/setup-go@v2.1.4
-        with:
-          go-version: 1.17
-
-      - name: Checkout
-        uses: actions/checkout@v2.4.0
-
-      - name: Cache Go modules
-        uses: actions/cache@v2.1.7
-        id: go-mod-cache
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-
-      - name: Get dependencies
-        run: make download
-
-      - name: Lint
-        run: |
-          result="$(make  lint)"
-          echo "$result"
-          [ -n "$(echo "$result" | grep 'diff -u')" ] && exit 1 || exit 0
-
-      - name: Build
-        run: make build
-
-#      - name: Test
+#  build:
+#    name: Build
+#    runs-on: ubuntu-20.04
+#    steps:
+#      - name: Set up Go
+#        uses: actions/setup-go@v2.1.4
+#        with:
+#          go-version: 1.17
+#
+#      - name: Checkout
+#        uses: actions/checkout@v2.4.0
+#
+#      - name: Cache Go modules
+#        uses: actions/cache@v2.1.7
+#        id: go-mod-cache
+#        with:
+#          path: ~/go/pkg/mod
+#          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+#          restore-keys: |
+#            ${{ runner.os }}-go-
+#
+#      - name: Get dependencies
+#        run: make download
+#
+#      - name: Lint
+#        run: |
+#          result="$(make  lint)"
+#          echo "$result"
+#          [ -n "$(echo "$result" | grep 'diff -u')" ] && exit 1 || exit 0
+#
+#      - name: Build
+#        run: make build
+#
+##      - name: Test
+##        env:
+##          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+##        run: make test-race
+#
+#      - name: Coverage
 #        env:
 #          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-#        run: make test-race
-
-      - name: Coverage
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        run: make coverage-out
-
-      - name: Upload Code Coverage
-        uses: codecov/codecov-action@v2.1.0
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage.out
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: true
-          verbose: true
-
-  release:
-    name: release
-    needs: [build]
-    outputs:
-      container_digest: ${{ steps.container_info.outputs.container_digest }}
-      container_tags: ${{ steps.container_info.outputs.container_tags }}
-      container_repos: ${{ steps.container_info.outputs.container_repos }}
-
-    runs-on: ubuntu-20.04
-
-    steps:
-      - name: Set up Go
-        uses: actions/setup-go@v2.1.4
-        with:
-          go-version: 1.17
-
-      - name: Checkout
-        uses: actions/checkout@v2.4.0
-        with:
-          fetch-depth: 0
-
-      - name: Login to Container registries
-        if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u rblit --password-stdin
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login -u ${{ github.actor }} --password-stdin ghcr.io
-
-      - name: Set release variables
-        id: release-vars
-        run: |
-          make release-vars > /tmp/spiffe-vault-release-vars.env
-          source /tmp/spiffe-vault-release-vars.env
-          if [[ -n "$LDFLAGS" ]]; then
-            echo "::set-output name=LDFLAGS::$LDFLAGS"
-          fi
-          if [[ -n "$GIT_HASH" ]]; then
-            echo "::set-output name=GIT_HASH::$GIT_HASH"
-          fi
-          rm -f /tmp/spiffe-vault-release-vars.env
-
-      - name: Release ${{ (!startsWith(github.ref, 'refs/tags/') && 'snapshot') || '' }}
-        uses: goreleaser/goreleaser-action@v2
-        with:
-          version: latest
-          args: release --rm-dist ${{ (!startsWith(github.ref, 'refs/tags/') && '--snapshot') || '' }} ${{ ((startsWith(github.ref, 'refs/tags/') && endsWith(github.ref, '-draft')) && '-f .goreleaser.draft.yml') || '' }}
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          LDFLAGS: ${{ steps.release-vars.outputs.LDFLAGS }}
-          GIT_HASH: ${{ steps.release-vars.outputs.GIT_HASH }}
-
-      - name: Get container info
-        id: container_info
-        if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          export CONTAINER_DIGEST=$(make container-digest GITHUB_REF=${{ github.ref_name }})
-          echo "::set-output name=container_digest::$CONTAINER_DIGEST"
-          echo "::set-output name=container_tags::$(make container-tags CONTAINER_DIGEST="${CONTAINER_DIGEST}" | paste -s -d ',' -)"
-          echo "::set-output name=container_repos::$(make container-repos CONTAINER_DIGEST="${CONTAINER_DIGEST}" | jq --raw-input . | jq --slurp -c)"
-
-      - name: Logout from Container registries
-        if: ${{ always() }}
-        run: |
-          docker logout
-          docker logout ghcr.io
+#        run: make coverage-out
+#
+#      - name: Upload Code Coverage
+#        uses: codecov/codecov-action@v2.1.0
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }}
+#          files: ./coverage.out
+#          flags: unittests
+#          name: codecov-umbrella
+#          fail_ci_if_error: true
+#          verbose: true
+#
+#  release:
+#    name: release
+#    needs: [build]
+#    outputs:
+#      container_digest: ${{ steps.container_info.outputs.container_digest }}
+#      container_tags: ${{ steps.container_info.outputs.container_tags }}
+#      container_repos: ${{ steps.container_info.outputs.container_repos }}
+#
+#    runs-on: ubuntu-20.04
+#
+#    steps:
+#      - name: Set up Go
+#        uses: actions/setup-go@v2.1.4
+#        with:
+#          go-version: 1.17
+#
+#      - name: Checkout
+#        uses: actions/checkout@v2.4.0
+#        with:
+#          fetch-depth: 0
+#
+#      - name: Login to Container registries
+#        if: startsWith(github.ref, 'refs/tags/')
+#        run: |
+#          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u rblit --password-stdin
+#          echo "${{ secrets.GITHUB_TOKEN }}" | docker login -u ${{ github.actor }} --password-stdin ghcr.io
+#
+#      - name: Set release variables
+#        id: release-vars
+#        run: |
+#          make release-vars > /tmp/spiffe-vault-release-vars.env
+#          source /tmp/spiffe-vault-release-vars.env
+#          if [[ -n "$LDFLAGS" ]]; then
+#            echo "::set-output name=LDFLAGS::$LDFLAGS"
+#          fi
+#          if [[ -n "$GIT_HASH" ]]; then
+#            echo "::set-output name=GIT_HASH::$GIT_HASH"
+#          fi
+#          rm -f /tmp/spiffe-vault-release-vars.env
+#
+#      - name: Release ${{ (!startsWith(github.ref, 'refs/tags/') && 'snapshot') || '' }}
+#        uses: goreleaser/goreleaser-action@v2
+#        with:
+#          version: latest
+#          args: release --rm-dist ${{ (!startsWith(github.ref, 'refs/tags/') && '--snapshot') || '' }} ${{ ((startsWith(github.ref, 'refs/tags/') && endsWith(github.ref, '-draft')) && '-f .goreleaser.draft.yml') || '' }}
+#        env:
+#          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+#          LDFLAGS: ${{ steps.release-vars.outputs.LDFLAGS }}
+#          GIT_HASH: ${{ steps.release-vars.outputs.GIT_HASH }}
+#
+#      - name: Get container info
+#        id: container_info
+#        if: startsWith(github.ref, 'refs/tags/')
+#        run: |
+#          export CONTAINER_DIGEST=$(make container-digest GITHUB_REF=${{ github.ref_name }})
+#          echo "::set-output name=container_digest::$CONTAINER_DIGEST"
+#          echo "::set-output name=container_tags::$(make container-tags CONTAINER_DIGEST="${CONTAINER_DIGEST}" | paste -s -d ',' -)"
+#          echo "::set-output name=container_repos::$(make container-repos CONTAINER_DIGEST="${CONTAINER_DIGEST}" | jq --raw-input . | jq --slurp -c)"
+#
+#      - name: Logout from Container registries
+#        if: ${{ always() }}
+#        run: |
+#          docker logout
+#          docker logout ghcr.io
 
   container-provenance:
     name: container-provenance
-    needs: [release]
+#    needs: [release]
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-20.04
 
