@@ -142,6 +142,10 @@ jobs:
           cosign-release: 'v1.4.1'
       - name: Check out repository
         uses: actions/checkout@v2
+      - name: ls
+        run: ls
+      - name: branch name
+        run: echo ${{ GITHUB_REF }}
       - name: Generate provenance for ${{ matrix.repo }}
         uses: ./action.yaml
         with:
