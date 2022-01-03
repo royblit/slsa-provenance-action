@@ -140,7 +140,8 @@ jobs:
         uses: sigstore/cosign-installer@v1.4.1
         with:
           cosign-release: 'v1.4.1'
-
+      - name: Check out repository
+        uses: actions/checkout@v2
       - name: Generate provenance for ${{ matrix.repo }}
         uses: ./action.yaml
         with:
@@ -182,6 +183,8 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
       - name: Generate provenance for Release
         uses: ./action.yaml
         with:
